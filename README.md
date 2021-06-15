@@ -1,6 +1,6 @@
-# 3D BAG Viewer
+# 3D BAG Viewer for Forum Virium Helsinki experiements
 
-This is the repository for the components of the website and viewer of the 3D BAG. For general 3D BAG or data-related questions, issues see https://docs.3dbag.nl/en/contact/ . 
+This is the repository fork of 3D BAG Viewer intended for 3D City Model experiements by [Forum Virium Helsinki](https://forumvirium.fi/en/)
 
 ## Installation
 ```
