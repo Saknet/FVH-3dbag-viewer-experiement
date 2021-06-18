@@ -96,7 +96,7 @@ export default {
 	props: {
 		tilesUrl: {
 			type: String,
-			default: 'http://godzilla.bk.tudelft.nl/3dtiles/ZuidHolland/lod13/tileset1.json'
+			default: 'https://geo.fvh.fi/tilesets/viikki/tileset.json'
 		},
 		basemapOptions: {
 			type: Object,
@@ -104,16 +104,28 @@ export default {
 
 				return {
 					type: "wmts",
+					attribution: "PDOK",
+					attributionURL: "https://www.pdok.nl/",
 					options: {
-						url: 'https://geodata.nationaalgeoregister.nl/tiles/service/wmts?',
-						layer: 'brtachtergrondkaart',
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Kantakartta',
 						style: 'default',
-						tileMatrixSet: "EPSG:28992",
+						tileMatrixSet: "ETRS-GK25",
 						service: "WMTS",
 						request: "GetTile",
 						version: "1.0.0",
 						format: "image/png"
 					}
+					// options: {
+					// 	url: 'https://geodata.nationaalgeoregister.nl/tiles/service/wmts?',
+					// 	layer: 'brtachtergrondkaart',
+					// 	style: 'default',
+					// 	tileMatrixSet: "EPSG:28992",
+					// 	service: "WMTS",
+					// 	request: "GetTile",
+					// 	version: "1.0.0",
+					// 	format: "image/png"
+					// }
 				};
 
 			}
@@ -524,11 +536,11 @@ export default {
 
 						// default viewport
 						this.setCameraPosFromRoute( {
-							rdx: "85181.55571255696",
-							rdy: "446859.38171179296",
-							ox: "-223.36609616703936",
-							oy: "281.19798302772574",
-							oz: "-184.218705413541"
+							rdx: "9438060",
+							rdy: "22741940",
+							ox: "0",
+							oy: "0",
+							oz: "300"
 						} );
 
 					}

@@ -42,7 +42,16 @@ export class WMTSTilesRenderer extends TilesRenderer {
 
 		requestURL += "&TileCol=" + tile.col.toString();
 		requestURL += "&TileRow=" + tile.row.toString();
-		requestURL += "&tileMatrix=" + tile.tileMatrix.level.toString();
+
+		if ( requestURL.includes( "https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts" ) ) {
+
+			requestURL += "&tileMatrix=ETRS-GK25:" + tile.tileMatrix.level.toString();
+
+		} else {
+
+			requestURL += "&tileMatrix=" + tile.tileMatrix.level.toString();
+
+		}
 
 		return requestURL;
 

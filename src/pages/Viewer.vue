@@ -11,8 +11,8 @@
       />
       <DropDownSelector
         v-model="tileset"
-        title="LoD"
-        :options="lods"
+        title="Tilesets"
+        :options="tilesets"
       />
       <search-bar
         @select-place="moveToPlace"
@@ -85,7 +85,7 @@ export default {
 
 		return {
 
-			customTilesUrl: 'https://godzilla.bk.tudelft.nl/3dtiles/lod22_kadaster/tileset1.json',
+			customTilesUrl: 'https://geo.fvh.fi/tilesets/viikki/tileset.json',
 			BAG3DVersion: this.$root.$data[ 'versions' ][ this.$root.$data[ "latest" ] ],
 
 			camOffset: {
@@ -95,34 +95,120 @@ export default {
 			},
 			camRotationZ: 0,
 
-			basemapPreset: 'brtachtergrondkaart',
+			basemapPreset: 'ortoilmakuva_2020',
 			basemaps: {
-				brtachtergrondkaart: {
-					name: "BRT Achtergrondkaart",
+				kantakarttahelsinki: {
+					name: "KantaKartta",
 					icon: "map"
 				},
-				brtachtergrondkaartgrijs: {
-					name: "BRT Achtergrondkaart (Grijs)",
+				opaskarttahelsinki: {
+					name: "Opaskartta",
 					icon: "map"
 				},
-				luchtfoto2020wmts: {
-					name: "Luchtfoto 2020",
+				ortoilmakuva20helsinki2015: {
+					name: "Ortoilmakuva 2015",
+					icon: "map"
+				},
+				karttasarjapks: {
+					name: "Karttasarja PKS",
+					icon: "map"
+				},
+				vaaravariortoilmakuva2017_20: {
+					name: "Vääräväri ortoilmakuva 2017",
+					icon: "map"
+				},
+				ajantasa_asemakaava_maanpaallinen: {
+					name: "Ajantasainen asemakaava maanpäällinen",
+					icon: "map"
+				},
+				ortoilmakuva_2018_5cm: {
+					name: "Ortoilmakuva 2018",
+					icon: "map"
+				},
+				ajantasa_asemakaava: {
+					name: "Ajantasainen asemakaava",
+					icon: "map"
+				},
+				ortoilmakuva_2017_20cm: {
+					name: "Ortoilmakuva 2017",
+					icon: "map"
+				},
+				kiinteistokartta: {
+					name: "Kiinteistokartta",
+					icon: "map"
+				},
+				vaaravariortoilmakuva_2015: {
+					name: "Vääräväri ortoilmakuva 2015",
+					icon: "map"
+				},
+				//
+				opaskartta_pks: {
+					name: "Opaskartta PKS",
+					icon: "map"
+				},
+				ortoilmakuva_2020: {
+					name: "Ortoilmakuva 2020",
+					icon: "map"
+				},
+				kantakartan_maastotiedot: {
+					name: "Kantakartan maastotiedot",
+					icon: "map"
+				},
+				ortoilmakuva_2014: {
+					name: "Ortoilmakuva 2014",
+					icon: "map"
+				},
+				tosiortoilmakuva_2017: {
+					name: "Tosi ortoilmakuva 2017",
+					icon: "map"
+				},
+				ortoilmakuva_2016: {
+					name: "Ortoilmakuva 2016",
+					icon: "map"
+				},
+				vaaravariortoilmakuva_2020: {
+					name: "Vääräväri ortoilmakuva 2020",
+					icon: "map"
+				},
+				ortoilmakuva: {
+					name: "Ortoilmakuva",
+					icon: "map"
+				},
+				ortoilmakuva_2019: {
+					name: "Ortoilmakuva 2019",
+					icon: "map"
+				},
+				vaaravariortoilmakuva_2019: {
+					name: "Vääräväriortoilmakuva 2019",
+					icon: "map"
+				},
+				//
+				ajantasa_asemakaava_maanpaallinen_varillinen: {
+					name: "Ajantasa asemakaava maanpäällinen värillinen",
+					icon: "map"
+				},
+				karttasarja: {
+					name: "Karttasarja",
+					icon: "map"
+				},
+				ortoilmakuva_2017: {
+					name: "Ortoilmakuva 2017",
+					icon: "map"
+				},
+				karttasarja_harmaa: {
+					name: "Karttasarja harmaa",
+					icon: "map"
+				},
+				kiinteistokartan_maastotiedot: {
+					name: "Kiinteistökartan maastotiedot",
 					icon: "map"
 				}
 			},
 
-			tileset: 'lod22',
-			lods: {
-				lod22: {
-					name: "LoD 2.2",
-					icon: "home"
-				},
-				lod13: {
-					name: "LoD 1.3",
-					icon: "home"
-				},
-				lod12: {
-					name: "LoD 1.2",
+			tileset: 'viikki',
+			tilesets: {
+				viikki: {
+					name: "viikki",
 					icon: "home"
 				}
 			},
@@ -170,41 +256,15 @@ export default {
 
 			const sources = {
 
-				top10nl: {
-
-					type: "wms",
-					attribution: "PDOK",
-					attributionURL: "https://www.pdok.nl/",
-					options: {
-						url: 'https://geodata.nationaalgeoregister.nl/top10nlv2/ows?',
-						layer: 'top10nlv2',
-						style: '',
-						imageFormat: 'image/png'
-					}
-
-				},
-
-				luchtfoto2018: {
-					type: "wms",
-					attribution: "PDOK",
-					attributionURL: "https://www.pdok.nl/",
-					options: {
-						url: 'https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/wmts?',
-						layer: '2018_ortho25',
-						style: 'default',
-						imageFormat: 'image/png'
-					}
-				},
-
-				brtachtergrondkaart: {
+				kantakarttahelsinki: {
 					type: "wmts",
-					attribution: "PDOK",
-					attributionURL: "https://www.pdok.nl/",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
 					options: {
-						url: 'https://geodata.nationaalgeoregister.nl/tiles/service/wmts?',
-						layer: 'brtachtergrondkaart',
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Kantakartta',
 						style: 'default',
-						tileMatrixSet: "EPSG:28992",
+						tileMatrixSet: "ETRS-GK25",
 						service: "WMTS",
 						request: "GetTile",
 						version: "1.0.0",
@@ -212,15 +272,15 @@ export default {
 					}
 				},
 
-				brtachtergrondkaartgrijs: {
+				opaskarttahelsinki: {
 					type: "wmts",
-					attribution: "PDOK",
-					attributionURL: "https://www.pdok.nl/",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
 					options: {
-						url: 'https://geodata.nationaalgeoregister.nl/tiles/service/wmts?',
-						layer: 'brtachtergrondkaartgrijs',
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Opaskartta_Helsinki',
 						style: 'default',
-						tileMatrixSet: "EPSG:28992",
+						tileMatrixSet: "ETRS-GK25",
 						service: "WMTS",
 						request: "GetTile",
 						version: "1.0.0",
@@ -228,15 +288,31 @@ export default {
 					}
 				},
 
-				luchtfoto2020wmts: {
+				ortoilmakuva20helsinki2015: {
 					type: "wmts",
-					attribution: "PDOK",
-					attributionURL: "https://www.pdok.nl/",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
 					options: {
-						url: 'https://geodata.nationaalgeoregister.nl/luchtfoto/rgb/wmts?',
-						layer: '2020_ortho25',
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ortoilmakuva_2015_20cm',
 						style: 'default',
-						tileMatrixSet: "EPSG:28992",
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				karttasarjapks: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Karttasarja_PKS',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
 						service: "WMTS",
 						request: "GetTile",
 						version: "1.0.0",
@@ -244,8 +320,357 @@ export default {
 					}
 				},
 
+				vaaravariortoilmakuva2017_20: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Vaaravariortoilmakuva_2017_20cm',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
 
+				ajantasa_asemakaava_maanpaallinen: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ajantasa_asemakaava_maanpaallinen',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/png"
+					}
+				},
 
+				ortoilmakuva_2018_5cm: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ortoilmakuva_2018_5cm',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				ajantasa_asemakaava: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ajantasa_asemakaava',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/png"
+					}
+				},
+
+				ortoilmakuva_2017_20cm: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ortoilmakuva_2017_20cm',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				kiinteistokartta: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Kiinteistokartta',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/png"
+					}
+				},
+
+				vaaravariortoilmakuva_2015: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Vaaravariortoilmakuva_2015_20cm',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+				//
+				opaskartta_pks: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Opaskartta_PKS',
+						style: 'rasteri',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/png"
+					}
+				},
+
+				ortoilmakuva_2020: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ortoilmakuva_2020_5cm',
+						style: 'rasteri',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				kantakartan_maastotiedot: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Kantakartan_maastotiedot',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/png"
+					}
+				},
+
+				ortoilmakuva_2014: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ortoilmakuva_2014',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				tosiortoilmakuva_2017: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'TosiOrtoilmakuva_2017_8cm',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				ortoilmakuva_2016: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ortoilmakuva_2016',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				vaaravariortoilmakuva_2020: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Vaaravariortoilmakuva_2020_5cm',
+						style: 'rasteri',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				ortoilmakuva: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ortoilmakuva',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				ortoilmakuva_2019: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ortoilmakuva_2019_20cm',
+						style: 'rasteri',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				vaaravariortoilmakuva_2019: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Vaaravariortoilmakuva_2019_20cm',
+						style: 'rasteri',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				ajantasa_asemakaava_maanpaallinen_varillinen: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ajantasa_asemakaava_maanpaallinen_varillinen',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/png"
+					}
+				},
+
+				karttasarja: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Karttasarja',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/png"
+					}
+				},
+
+				ortoilmakuva_2017: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Ortoilmakuva_2017_8cm',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/jpeg"
+					}
+				},
+
+				karttasarja_harmaa: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Karttasarja_harmaa',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/png"
+					}
+				},
+
+				kiinteistokartan_maastotiedot: {
+					type: "wmts",
+					attribution: "hri",
+					attributionURL: "https://hri.fi/data/en_GB/dataset/helsingin-ortoilmakuvat",
+					options: {
+						url: 'https://kartta.hel.fi/ws/geoserver/avoindata/gwc/service/wmts?',
+						layer: 'Kiinteistokartan_maastotiedot',
+						style: 'default',
+						tileMatrixSet: "ETRS-GK25",
+						service: "WMTS",
+						request: "GetTile",
+						version: "1.0.0",
+						format: "image/png"
+					}
+				},
 			};
 
 			return sources[ this.basemapPreset ];
