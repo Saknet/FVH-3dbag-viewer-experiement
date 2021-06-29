@@ -372,6 +372,9 @@ export default {
 				return;
 
 			}
+
+			console.log( "setCameraPosFromRoute this.tiles.root.cached.transform  " + JSON.stringify( this.tiles.root.cached.transform ) );
+
 			let tileset_offset_x = this.tiles.root.cached.transform.elements[ 12 ];
 			let tileset_offset_y = this.tiles.root.cached.transform.elements[ 13 ];
 			let local_x = rd_x - tileset_offset_x;
@@ -406,6 +409,7 @@ export default {
 			// compute current camera position relative to target
 			let local_x = this.controls.target.x;
 			let local_z = this.controls.target.z;
+			console.log( "setCameraPosFromRoute this.tiles.root.cached.transform  " + JSON.stringify( this.tiles.root.cached.transform ) );
 			let tileset_offset_x = this.tiles.root.cached.transform.elements[ 12 ];
 			let tileset_offset_y = this.tiles.root.cached.transform.elements[ 13 ];
 
@@ -432,7 +436,7 @@ export default {
 				{ url: '/', query: q }
 			).catch( err => {} );
 
-			// console.log( {rdx: RdX, rdy: RdY, cam_offset: cam_offset} );
+			console.log( "setRouteFromCameraPos" + { rdx: RdX, rdy: RdY, cam_offset: cam_offset } );
 
 		},
 		placeMarkerOnPoint( position ) {
@@ -517,6 +521,8 @@ export default {
 			this.tiles.maxDepth = 15;
 			this.tiles.showEmptyTiles = true;
 
+			console.log( "reinitTiles this.tiles " + JSON.stringify( this.tiles ) );
+
 			this.tiles.downloadQueue.priorityCallback = tile => 1 / tile.cached.distance;
 
 			this.tiles.setCamera( this.dummyCamera );
@@ -548,6 +554,7 @@ export default {
 				}
 
 				const transform = this.tiles.root.cached.transform;
+				console.log( "onLoadTileSet transform " + JSON.stringify( transform ) );
 				this.sceneTransform = new Vector2( transform.elements[ 12 ], transform.elements[ 13 ] );
 
 				this.needsRerender = 2;
@@ -557,6 +564,7 @@ export default {
 			this.tiles.onLoadModel = ( s ) => {
 
 				const offset_z = this.tiles.root.cached.transform.elements[ 14 ];
+				console.log( "setCameraPosFromRoute this.tiles.root.cached.transform  " + JSON.stringify( this.tiles.root.cached.transform ) );
 				s.traverse( c => {
 
 					if ( c.material ) {
@@ -966,6 +974,8 @@ export default {
 
 		},
 		renderScene( ) {
+
+			console.log( "renderScene this.tiles " + JSON.stringify( this.tiles ) );
 
 			requestAnimationFrame( this.renderScene );
 

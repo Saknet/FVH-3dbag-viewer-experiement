@@ -95,7 +95,7 @@ export default {
 			},
 			camRotationZ: 0,
 
-			basemapPreset: 'ortoilmakuva_2020',
+			basemapPreset: 'karttasarja_harmaa',
 			basemaps: {
 				kantakarttahelsinki: {
 					name: "KantaKartta",
@@ -205,10 +205,14 @@ export default {
 				}
 			},
 
-			tileset: 'viikki',
+			tileset: 'viikki2',
 			tilesets: {
 				viikki: {
 					name: "viikki",
+					icon: "home"
+				},
+				viikki2: {
+					name: "viikki2",
 					icon: "home"
 				}
 			},
@@ -695,6 +699,7 @@ export default {
 			if ( to.query.lod ) {
 
 				this.tileset = to.query.lod;
+				console.log( "Viewer mounted this.tileset " + JSON.stringify( this.tileset ) );
 
 			}
 
@@ -721,6 +726,7 @@ export default {
 		if ( this.$router.currentRoute.query.lod ) {
 
 			this.tileset = this.$router.currentRoute.query.lod;
+			console.log( "Viewer mounted this.tileset " + JSON.stringify( this.tileset ) );
 
 		}
 
@@ -749,6 +755,8 @@ export default {
 
 			if ( res ) {
 
+				console.log( "Viewer moveToPlace res " + JSON.stringify( res ) );
+
 				this.$router.push( {
 					path: '/' + this.$route.params.locale + '/viewer',
 					query: {
@@ -770,6 +778,7 @@ export default {
 			if ( event ) {
 
 				this.pickedBuilding = event;
+				console.log( "objectPicked this.pickedBuilding " + this.pickedBuilding );
 				this.showBuildingInfo = true;
 
 			} else {

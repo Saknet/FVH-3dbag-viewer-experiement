@@ -26,8 +26,13 @@ class Tile {
 
 	getCenterPosition( offset = new Vector2() ) {
 
+		console.log( "TileScheme getCenterPosition offset " + JSON.stringify( offset ) );
+
 		const x = this.tileMatrix.minX + this.col * this.tileMatrix.tileSpanX + this.tileMatrix.tileSpanX / 2 - offset.x;
 		const y = this.tileMatrix.maxY - this.row * this.tileMatrix.tileSpanY - this.tileMatrix.tileSpanY / 2 - offset.y;
+
+		console.log( "TileScheme getCenterPosition x " + x );
+		console.log( "TileScheme getCenterPosition y " + y );
 
 		return new Vector2( x, y );
 
@@ -51,11 +56,15 @@ class Tile {
 
 		}
 
+		console.log( "TileScheme getNeighbours neighbours " + JSON.stringify( neighbours ) );
+
 		return neighbours;
 
 	}
 
 	getExtentPoints( transform ) {
+
+		console.log( "getExtentPoints transform " + JSON.stringify( transform ) );
 
 		// Calculate tile bounds and center
 		var upperLeft = new Vector3();
@@ -67,6 +76,12 @@ class Tile {
 		var lowerLeft = new Vector3( upperLeft.x, 0, upperLeft.z + this.tileMatrix.tileSpanY );
 		var lowerRight = new Vector3( upperLeft.x + this.tileMatrix.tileSpanX, 0, upperLeft.z + this.tileMatrix.tileSpanY );
 		var centre = new Vector3( upperLeft.x + this.tileMatrix.tileSpanX / 2, 0, upperLeft.z + this.tileMatrix.tileSpanY / 2 );
+
+		console.log( "TileScheme getExtentPoints upperLeft " + upperLeft );
+		console.log( "TileScheme getExtentPoints upperRight " + upperRight );
+		console.log( "TileScheme getExtentPoints lowerLeft " + lowerLeft );
+		console.log( "TileScheme getExtentPoints lowerRight " + lowerRight );
+		console.log( "TileScheme getExtentPoints centre " + centre );
 
 		return [ centre, lowerLeft, upperRight, upperLeft, lowerRight ];
 
@@ -80,6 +95,11 @@ class Tile {
 		const maxX = minX + this.tileMatrix.tileSpanX;
 		const minY = maxY - this.tileMatrix.tileSpanY;
 
+		console.log( "TileScheme getBoundingBox minX " + minX );
+		console.log( "TileScheme getBoundingBox maxY " + maxY );
+		console.log( "TileScheme getBoundingBox maxX " + maxX );
+		console.log( "TileScheme getBoundingBox minY " + minY );
+
 		return [ minX, minY, maxX, maxY ];
 
 	}
@@ -87,6 +107,7 @@ class Tile {
 	getBoundingSphere( transform ) {
 
 		const center = this.getCenterPosition( transform );
+		console.log( "TileScheme getBoundingSphere center " + JSON.stringify( center ) );
 
 		return new Sphere( new Vector3( center.x, 0, - center.y ), Math.max( this.tileMatrix.tileSpanX, this.tileMatrix.tileSpanY ) );
 
@@ -167,6 +188,8 @@ class BaseTileScheme {
 
 	getTilesInView( camera, resFactor, transform ) {
 
+		console.log( "TileScheme getTilesInView transform " + JSON.stringify( transform ) );
+
 		if ( this.tileMatrixSet.length == 0 ) {
 
 			return [];
@@ -189,6 +212,9 @@ class BaseTileScheme {
 		const centerTile = tileMatrix.getTileAt( position );
 
 		const tiles = this.growRegion( centerTile, camera, transform );
+
+		console.log( "TileScheme getTilesInView centerTile " + JSON.stringify( centerTile ) );
+		console.log( "TileScheme getTilesInView tiles " + JSON.stringify( tiles ) );
 
 		return tiles;
 
@@ -242,6 +268,8 @@ class BaseTileScheme {
 			}
 
 		}
+
+		console.log( "TileScheme growRegion growRegion " + JSON.stringify( tilesInView ) );
 
 		return ( tilesInView );
 

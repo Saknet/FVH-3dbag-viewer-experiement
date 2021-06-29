@@ -85,6 +85,9 @@ export class TilesRenderer {
 		// Create tiles that hadn't been created yet
 		tiles.forEach( function ( ti ) {
 
+			console.log( "update tiles.forEach ti " + JSON.stringify( ti ) );
+			console.log( "update tiles.forEach this.downloadQueue" + JSON.stringify( this.downloadQueue ) );
+			console.log( "update tiles.forEach sceneCenter" + JSON.stringify( sceneCenter ) );
 			const tileId = ti.getId();
 
 			if ( ! this.activeTiles.has( tileId ) ) {
@@ -134,6 +137,8 @@ export class TilesRenderer {
 
 	cleanTileLevels() {
 
+		console.log( "cleanTileLevels " + JSON.stringify( this.group.children ) );
+
 		this.needsOldTileLevelClean = false;
 		const scope = this;
 
@@ -166,6 +171,8 @@ export class TilesRenderer {
 
 	createTile( tile, transform ) {
 
+		console.log( "createTile " + JSON.stringify( tile ) );
+
 		var geometry = this.track( new PlaneBufferGeometry( tile.tileMatrix.tileSpanX, tile.tileMatrix.tileSpanY ) );
 
 		var mesh = new Mesh( geometry, this.tempMaterial );
@@ -181,8 +188,12 @@ export class TilesRenderer {
 		var controller = new AbortController();
 		var signal = controller.signal;
 		this.downloadQueue.set( tileId, controller );
+		console.log( "createTile tile " + JSON.stringify( tile ) );
+		console.log( "createTile signal " + JSON.stringify( signal ) );
+		console.log( "createTile requestURL " + JSON.stringify( requestURL ) );
 		fetch( requestURL, { signal } ).then( function ( res ) {
 
+			console.log( "createTile res " + JSON.stringify( res ) );
 			return res.arrayBuffer();
 
 		} ).then( function ( buffer ) {
@@ -206,6 +217,8 @@ export class TilesRenderer {
 				var material = new MeshBasicMaterial( { map: scope.track( tex ) } );
 				material.depthWrite = false;
 				mesh.material = material;
+				console.log( "createTile tileId " + tileId );
+				console.log( "createTile image.src " + image.src );
 				scope.onLoadTile();
 
 			};
@@ -221,9 +234,12 @@ export class TilesRenderer {
 
 		const scenePosition = tile.getCenterPosition( transform );
 
+		console.log( "createTile scenePosition " + JSON.stringify( scenePosition ) );
+
 		mesh.position.x = scenePosition.x;
 		mesh.position.y = scenePosition.y;
 		mesh.updateMatrix();
+		console.log( "createTile mesh " + JSON.stringify( mesh ) );
 
 	}
 

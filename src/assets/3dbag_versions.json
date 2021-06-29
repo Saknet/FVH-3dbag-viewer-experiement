@@ -15,7 +15,8 @@
       "WMS" : "https://data.3dbag.nl/api/BAG3D_v2/wms",
 
       "3DTilesets" : {
-        "viikki": "https://geo.fvh.fi/tilesets/viikki/tileset.json"
+        "viikki": "https://geo.fvh.fi/tilesets/viikki/tileset.json",
+        "viikki2": "https://geo.fvh.fi/tilesets/viikki2/tileset.json"
       }
     }
   }
